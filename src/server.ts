@@ -5,9 +5,7 @@ import path from "path";
 const PORT = 3000;
 
 const server = http.createServer((req, res) => {
-  // /view-image 경로 처리
   if (req.url === "/view-image" && req.method === "GET") {
-    // dist/server.js 실행 기준 → dist/images/veryhappydog.jpg
     const imagePath = path.resolve(__dirname, "./images/veryhappydog.jpg");
 
     fs.access(imagePath, fs.constants.F_OK, (notFound) => {
@@ -32,7 +30,6 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // 루트 페이지
   if (req.url === "/" && req.method === "GET") {
     res.statusCode = 200;
     res.setHeader("Content-Type", "text/html; charset=utf-8");
@@ -43,7 +40,6 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // 기타 경로: 404
   res.statusCode = 404;
   res.setHeader("Content-Type", "text/plain; charset=utf-8");
   res.end("Not Found");
